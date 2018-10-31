@@ -1,7 +1,7 @@
 ## Сборка приложения (для Ubuntu x64)
 #### Установка зависимостей
 ```
-sudo add-apt-repository ppa:maarten-fonville/android-build-tool
+sudo add-apt-repository ppa:maarten-fonville/android-build-tools
 sudo apt update
 sudo apt insatll git adb default-jdk android-build-tools-installer android-sdk-platform-23
 ```
