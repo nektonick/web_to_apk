@@ -3,7 +3,7 @@
 ```
 sudo add-apt-repository ppa:maarten-fonville/android-build-tools
 sudo apt update
-sudo apt insatll git adb default-jdk android-build-tools-installer android-sdk-platform-23
+sudo apt install git adb default-jdk android-build-tools-installer android-sdk-platform-23
 ```
 #### Загрузка файлов
 ```
