@@ -5,7 +5,9 @@ commit:
 
 make_r:
 	cd app
+	pwd
 	export ANDROID=/usr/lib/android-sdk/platforms/android-23/android.jar
+	echo $ANDROID
 	aapt package -f -m -J src -M AndroidManifest.xml -S res -I $ANDROID
 
 compile: make_r
@@ -25,3 +27,6 @@ apk: build
 
 install: apk
 	adb install bin/unaligned-aligned-debugSigned.apk
+
+clean:
+	bash clean.sh
