@@ -5,7 +5,7 @@
 void on_button_clicked ()
 {
     std::cout << "Hello World" << std::endl;
-	system("make -f ../Makefile apk");
+	system("make -C .. test");
 }
 int main(int argc, char *argv[])
 {
