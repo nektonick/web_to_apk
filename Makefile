@@ -1,40 +1,36 @@
 ANDROID="/usr/lib/android-sdk/platforms/android-23/android.jar"
+MANIFEST="app/AndroidManifest.xml"
 
 test:
-	echo ${ANDROID};\
-	cd app;\
-	pwd;\
+	echo app/*
+	echo app/%
 
 commit:
-	git add --a;\
-	git commit;\
-	git push origin master;\
+	git add --a
+	git commit
+	git push origin master
 
 make_r:
-	cd app;\
-	pwd;\
-	echo ${ANDROID};\
-	aapt package -f -m -J src -M AndroidManifest.xml -S res -I ${ANDROID};\
+	aapt package -f -m -J app/src -M ${MANIFEST} -S app/res -I ${ANDROID}
 
 compile: make_r
-	javac -source 8 -target 8 -d obj -classpath src -bootclasspath ${ANDROID} src/com/example/helloandroid/*.java;\
+	javac -source 8 -target 8 -d app/obj -classpath app/src -bootclasspath ${ANDROID} app/src/com/example/helloandroid/*.java
 	
 classes: compile
-	dx --dex --output=bin/classes.dex obj;\
+	dx --dex --output=app/bin/classes.dex app/obj
 
 build: classes
-	aapt package -f -m -F bin/unaligned.apk -M AndroidManifest.xml -S res -I ${ANDROID};\
-	cp bin/classes.dex .;\
-	aapt add bin/unaligned.apk classes.dex;\
-	rm classes.dex;\
+	aapt package -f -m -F app/bin/unaligned.apk -M ${MANIFEST} -S app/res -I ${ANDROID}
+	cd app/bin/; aapt add unaligned.apk classes.dex
 
 apk: build
-	java -jar ../uber-apk-signer-0.8.4.jar -a bin/unaligned.apk -o bin;\
+	java -jar uber-apk-signer-0.8.4.jar -a app/bin/unaligned.apk -o app/bin
+	mv app/bin/unaligned-aligned-debugSigned.apk app/bin/debug.apk
 
 install: apk
-	adb install bin/unaligned-aligned-debugSigned.apk;\
+	adb install app/bin/debug.apk
 
 clean:
-	rm app/bin/*;\
-	rm app/obj/com/example/helloandroid/*;\
-	rm app/src/com/example/helloandroid/R.java;\
+	rm -f app/bin/*
+	rm -f app/obj/com/example/helloandroid/*
+	rm -f app/src/com/example/helloandroid/R.java

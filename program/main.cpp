@@ -5,8 +5,9 @@
 void on_button_clicked ()
 {
     std::cout << "Hello World" << std::endl;
-	system("make -C .. test");
+	system("make -C .. apk");
 }
+
 int main(int argc, char *argv[])
 {
 	auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
