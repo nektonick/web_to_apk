@@ -165,12 +165,15 @@
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
                     <property name="row_spacing">5</property>
-                    <property name="column_spacing">15</property>
+                    <property name="column_spacing">10</property>
+                    <property name="column_homogeneous">True</property>
                     <child>
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Резрешение 1: </property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
+                        <property name="label" translatable="yes">Доступ к Wi-fi: </property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -181,7 +184,9 @@
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Резрешение 2: </property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
+                        <property name="label" translatable="yes">Доступ к локальным файлам: </property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -192,7 +197,9 @@
                       <object class="GtkLabel">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="label" translatable="yes">Резрешение 3: </property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
+                        <property name="label" translatable="yes">Доступ к камере:</property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -204,6 +211,8 @@
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
+                        <property name="hexpand">True</property>
+                        <property name="vexpand">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
                       </object>
@@ -236,6 +245,32 @@
                       <packing>
                         <property name="left_attach">1</property>
                         <property name="top_attach">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="halign">start</property>
+                        <property name="hexpand">True</property>
+                        <property name="label" translatable="yes">Доступ к геоданным: </property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">0</property>
+                        <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">3</property>
                       </packing>
                     </child>
                   </object>
@@ -272,6 +307,7 @@
             <property name="receives_default">True</property>
             <property name="halign">center</property>
             <property name="valign">end</property>
+            <property name="margin_top">20</property>
             <property name="vexpand">True</property>
             <signal name="clicked" handler="on_button_clicked" object="window" swapped="no"/>
           </object>

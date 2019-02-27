@@ -157,7 +157,6 @@
                 <property name="valign">center</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="expanded">True</property>
                 <child>
                   <object class="GtkGrid">
                     <property name="visible">True</property>
