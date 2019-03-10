@@ -4,10 +4,9 @@
   <requires lib="gtk+" version="3.10"/>
   <object class="GtkWindow" id="window">
     <property name="name">window</property>
-    <property name="width_request">300</property>
-    <property name="height_request">300</property>
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
+    <property name="window_position">center</property>
     <property name="gravity">north</property>
     <child>
       <placeholder/>
@@ -54,10 +53,11 @@
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="valign">start</property>
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
             <property name="hexpand">True</property>
-            <property name="vexpand">False</property>
+            <property name="vexpand">True</property>
             <child>
               <object class="GtkEntry">
                 <property name="visible">True</property>
@@ -100,8 +100,9 @@
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">10</property>
+            <property name="valign">start</property>
+            <property name="margin_bottom">15</property>
+            <property name="hexpand">True</property>
             <property name="vexpand">True</property>
             <child>
               <object class="GtkLabel">
@@ -150,6 +151,9 @@
           <object class="GtkGrid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="valign">start</property>
+            <property name="margin_bottom">15</property>
+            <property name="vexpand">True</property>
             <child>
               <object class="GtkExpander">
                 <property name="visible">True</property>
@@ -157,6 +161,7 @@
                 <property name="valign">center</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
+                <property name="resize_toplevel">True</property>
                 <child>
                   <object class="GtkGrid">
                     <property name="visible">True</property>
@@ -173,7 +178,7 @@
                         <property name="can_focus">False</property>
                         <property name="halign">start</property>
                         <property name="hexpand">True</property>
-                        <property name="label" translatable="yes">Доступ к Wi-fi: </property>
+                        <property name="label" translatable="yes">Доступ к интернету: </property>
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
@@ -207,7 +212,7 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkCheckButton">
+                      <object class="GtkCheckButton" id="check1">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
@@ -215,6 +220,7 @@
                         <property name="vexpand">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_check1_toggled" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -222,12 +228,13 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkCheckButton">
+                      <object class="GtkCheckButton" id="check2">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_check2_toggled" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -235,12 +242,27 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkCheckButton">
+                      <object class="GtkCheckButton" id="check4">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
                         <property name="receives_default">False</property>
                         <property name="active">True</property>
                         <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_check4_toggled" swapped="no"/>
+                      </object>
+                      <packing>
+                        <property name="left_attach">1</property>
+                        <property name="top_attach">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkCheckButton" id="check3">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">False</property>
+                        <property name="active">True</property>
+                        <property name="draw_indicator">True</property>
+                        <signal name="toggled" handler="on_check3_toggled" swapped="no"/>
                       </object>
                       <packing>
                         <property name="left_attach">1</property>
@@ -257,19 +279,6 @@
                       </object>
                       <packing>
                         <property name="left_attach">0</property>
-                        <property name="top_attach">3</property>
-                      </packing>
-                    </child>
-                    <child>
-                      <object class="GtkCheckButton">
-                        <property name="visible">True</property>
-                        <property name="can_focus">True</property>
-                        <property name="receives_default">False</property>
-                        <property name="active">True</property>
-                        <property name="draw_indicator">True</property>
-                      </object>
-                      <packing>
-                        <property name="left_attach">1</property>
                         <property name="top_attach">3</property>
                       </packing>
                     </child>
@@ -307,7 +316,6 @@
             <property name="receives_default">True</property>
             <property name="halign">center</property>
             <property name="valign">end</property>
-            <property name="margin_top">20</property>
             <property name="vexpand">True</property>
             <signal name="clicked" handler="on_button_clicked" object="window" swapped="no"/>
           </object>
