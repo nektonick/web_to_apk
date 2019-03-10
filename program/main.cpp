@@ -39,7 +39,7 @@ void on_check4_toggled (){
 
 void buildAndroidManifest (){
 	string line;
-	ifstream file("/home/nick/Документы/web_to_apk/app/AndroidManifestStart.xml");
+	ifstream file("../app/AndroidManifestStart.xml");
 	if (file.is_open()){
         while (getline(file, line)){
             cout << line << endl;
@@ -48,7 +48,7 @@ void buildAndroidManifest (){
     file.close();
 
 	if (internet == true){
-		ifstream p1file("/home/nick/Документы/web_to_apk/app/AndroidManifestPermission1.xml");
+		ifstream p1file("../app/AndroidManifestPermission1.xml");
 		if (p1file.is_open()){
         	while (getline(p1file, line)){
             	cout << line << endl;
@@ -58,7 +58,7 @@ void buildAndroidManifest (){
 	}
 
 	if (local_files == true){
-		ifstream p2file("/home/nick/Документы/web_to_apk/app/AndroidManifestPermission2.xml");
+		ifstream p2file("../app/AndroidManifestPermission2.xml");
 		if (p2file.is_open()){
         	while (getline(p2file, line)){
             	cout << line << endl;
@@ -68,7 +68,7 @@ void buildAndroidManifest (){
 	}
 
 	if (camera == true){
-		ifstream p3file("/home/nick/Документы/web_to_apk/app/AndroidManifestPermission3.xml");
+		ifstream p3file("../app/AndroidManifestPermission3.xml");
 		if (p3file.is_open()){
         	while (getline(p3file, line)){
             	cout << line << endl;
@@ -78,7 +78,7 @@ void buildAndroidManifest (){
 	}
 
 	if (geodata== true){
-		ifstream p4file("/home/nick/Документы/web_to_apk/app/AndroidManifestPermission4.xml");
+		ifstream p4file("../app/AndroidManifestPermission4.xml");
 		if (p4file.is_open()){
         	while (getline(p4file, line)){
             	cout << line << endl;
@@ -88,7 +88,7 @@ void buildAndroidManifest (){
 	}
 
 
-	ifstream lastFile ("/home/nick/Документы/web_to_apk/app/AndroidManifestEnd.xml");
+	ifstream lastFile ("../app/AndroidManifestEnd.xml");
 		if (lastFile.is_open()){
         	while (getline(lastFile, line)){
             	cout << line << endl;
