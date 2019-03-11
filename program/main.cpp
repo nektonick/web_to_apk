@@ -40,9 +40,12 @@ void on_check4_toggled (){
 void buildAndroidManifest (){
 	string line;
 	ifstream file("../app/AndroidManifestStart.xml");
+	ofstream out;
+	out.open("../app/AndroidManifest.xml");
 	if (file.is_open()){
         while (getline(file, line)){
-            cout << line << endl;
+			if (out.is_open())
+            	out << line << endl;
         }
     }
     file.close();
@@ -51,8 +54,9 @@ void buildAndroidManifest (){
 		ifstream p1file("../app/AndroidManifestPermission1.xml");
 		if (p1file.is_open()){
         	while (getline(p1file, line)){
-            	cout << line << endl;
-        	}
+            	if (out.is_open())
+            		out << line << endl;        
+			}
     	}
 		p1file.close();
 	}
@@ -61,7 +65,8 @@ void buildAndroidManifest (){
 		ifstream p2file("../app/AndroidManifestPermission2.xml");
 		if (p2file.is_open()){
         	while (getline(p2file, line)){
-            	cout << line << endl;
+            	if (out.is_open())
+            		out << line << endl;
         	}
     	}
 		p2file.close();
@@ -71,7 +76,8 @@ void buildAndroidManifest (){
 		ifstream p3file("../app/AndroidManifestPermission3.xml");
 		if (p3file.is_open()){
         	while (getline(p3file, line)){
-            	cout << line << endl;
+            	if (out.is_open())
+            		out << line << endl;
         	}
     	}
 		p3file.close();
@@ -81,7 +87,8 @@ void buildAndroidManifest (){
 		ifstream p4file("../app/AndroidManifestPermission4.xml");
 		if (p4file.is_open()){
         	while (getline(p4file, line)){
-            	cout << line << endl;
+            	if (out.is_open())
+            		out << line << endl;
         	}
     	}
 		p4file.close();
@@ -91,11 +98,12 @@ void buildAndroidManifest (){
 	ifstream lastFile ("../app/AndroidManifestEnd.xml");
 		if (lastFile.is_open()){
         	while (getline(lastFile, line)){
-            	cout << line << endl;
+            	if (out.is_open())
+            		out << line << endl;  
         	}
     	}
     lastFile.close();
-
+	out.close();
 }
 
 
