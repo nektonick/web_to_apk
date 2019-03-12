@@ -10,6 +10,7 @@ bool internet = true;
 bool local_files = true;
 bool camera = true;
 bool geodata = true;
+bool islink = true; //приложению передана ссылка на сайт или папка с ресурсами (пока ни с чем не связана)
 
 void on_button_clicked (){
 
@@ -106,13 +107,54 @@ void buildAndroidManifest (){
 	out.close();
 }
 
+void buildMainActivity(string link){
+	if (islink == true){ //если передана ссылка
+		string line;
+		ifstream res1("../app/src/com/example/helloandroid/MainActivityStart.java");
+		ofstream out;
+		out.open("../app/src/com/example/helloandroid/MainActivity.java");
+		if (res1.is_open()){
+        	while (getline(res1, line)){
+				if (out.is_open())
+            		out << line << endl;
+        	}
+    	}
+    	res1.close();
+		
+		string s="        webView.loadUrl(\"" ;
+		string ss="\");";
+	
+		s=s+link+ss;	
+		out << s << endl;
+
+		ifstream res2("../app/src/com/example/helloandroid/MainActivityEnd.java");
+		if (res2.is_open()){
+        	while (getline(res2, line)){
+				if (out.is_open())
+            		out << line << endl;
+        	}
+    	}
+    	res2.close();
+	}
+}
+
+string getlink(){
+	string link;
+	//тут должна быть какая-то магия с получением строки из графического интерфейса
+	return link;
+}
 
 int main(int argc, char *argv[]){
 
+	string link="https://example.com"; //ссылка на сайт
+
 	buildAndroidManifest();
+	getlink();
+	buildMainActivity(link);
 
 	auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
 	auto builder = Gtk::Builder::create_from_file("app.glade");
+
 	Gtk::Window *window = nullptr;
 	builder->get_widget("window", window);
 
