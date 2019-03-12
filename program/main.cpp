@@ -110,7 +110,7 @@ void buildAndroidManifest (){
 void buildMainActivity(string link){
 	if (islink == true){ //если передана ссылка
 		string line;
-		ifstream res1("../app/src/com/example/helloandroid/MainActivityStart.java");
+		ifstream res1("../app/src/com/example/MainActivityStart.java");
 		ofstream out;
 		out.open("../app/src/com/example/helloandroid/MainActivity.java");
 		if (res1.is_open()){
@@ -127,7 +127,7 @@ void buildMainActivity(string link){
 		s=s+link+ss;	
 		out << s << endl;
 
-		ifstream res2("../app/src/com/example/helloandroid/MainActivityEnd.java");
+		ifstream res2("../app/src/com/example/MainActivityEnd.java");
 		if (res2.is_open()){
         	while (getline(res2, line)){
 				if (out.is_open())
