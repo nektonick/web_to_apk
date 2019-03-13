@@ -14,28 +14,28 @@ bool islink = true; //приложению передана ссылка на с
 
 void on_button_clicked (){
 
-    cout << "Hello World" << std::endl;
+ // cout << "Hello World" << std::endl;
 	system("make -C .. apk");
 }
 
 void on_check1_toggled (){
 	internet = !internet;
-	cout<<internet<<endl;
+//	cout<<internet<<endl;
 }
 
 void on_check2_toggled (){
 	local_files = !local_files;
-	cout<<local_files<<endl;
+//	cout<<local_files<<endl;
 }
 
 void on_check3_toggled (){
 	camera = !camera;
-	cout<<camera<<endl;
+//	cout<<camera<<endl;
 }
 
 void on_check4_toggled (){
 	 geodata= !geodata;
-	 cout<<geodata<<endl;
+//	 cout<<geodata<<endl;
 }
 
 void buildAndroidManifest (){
@@ -138,18 +138,11 @@ void buildMainActivity(string link){
 	}
 }
 
-string getlink(){
-	string link;
-	//тут должна быть какая-то магия с получением строки из графического интерфейса
-	return link;
-}
-
 int main(int argc, char *argv[]){
 
 	string link="https://example.com"; //ссылка на сайт
 
 	buildAndroidManifest();
-	getlink();
 	buildMainActivity(link);
 
 	auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
@@ -161,6 +154,8 @@ int main(int argc, char *argv[]){
 	Gtk::Button *button = nullptr;
 	builder->get_widget("button", button);
 	button->signal_clicked().connect(sigc::ptr_fun(on_button_clicked));
+	
+	Gtk::EntryBuffer *entrybuffer1 = nullptr;//его нужно связать с буфером из глейда
 
 	Gtk::CheckButton *check1 = nullptr;
 	builder->get_widget("check1", check1);
@@ -177,6 +172,9 @@ int main(int argc, char *argv[]){
 	Gtk::CheckButton *check4 = nullptr;
 	builder->get_widget("check4", check4);
 	check4->signal_toggled().connect(sigc::ptr_fun(on_check4_toggled));
+
+	Gtk::Entry *entry1 = nullptr;
+	builder->get_widget("entry1", entry1);
 
 	app->run(*window);
 }
