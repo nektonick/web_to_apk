@@ -5,18 +5,15 @@
 #include <string>
 
 using namespace std;
+using namespace Gtk;
 
 bool internet = true;
 bool local_files = true;
 bool camera = true;
 bool geodata = true;
 bool islink = true; //приложению передана ссылка на сайт или папка с ресурсами (пока ни с чем не связана)
+string URL = "https://example.com"; //ссылка на сайт
 
-void on_button_clicked (){
-
- // cout << "Hello World" << std::endl;
-	system("make -C .. apk");
-}
 
 void on_check1_toggled (){
 	internet = !internet;
@@ -107,7 +104,7 @@ void buildAndroidManifest (){
 	out.close();
 }
 
-void buildMainActivity(string link){
+void buildMainActivity(){
 	if (islink == true){ //если передана ссылка
 		string line;
 		ifstream res1("../app/src/com/example/MainActivityStart.java");
@@ -124,7 +121,7 @@ void buildMainActivity(string link){
 		string s="        webView.loadUrl(\"" ;
 		string ss="\");";
 	
-		s=s+link+ss;	
+		s=s+URL+ss;	
 		out << s << endl;
 
 		ifstream res2("../app/src/com/example/MainActivityEnd.java");
@@ -138,43 +135,62 @@ void buildMainActivity(string link){
 	}
 }
 
+void f(Entry* entry)
+{
+	cout<<entry->get_text()<<" "<<endl;
+	URL = entry->get_text();
+}
+
+void on_button_clicked (){
+
+ // cout << "Hello World" << std::endl;
+	buildAndroidManifest();
+	buildMainActivity();
+ 
+	system("make -C .. apk");
+}
+
+
 int main(int argc, char *argv[]){
 
-	string link="https://example.com"; //ссылка на сайт
 
-	buildAndroidManifest();
-	buildMainActivity(link);
+//	buildAndroidManifest();
+//	buildMainActivity(link);
 
-	auto app = Gtk::Application::create(argc, argv, "org.gtkmm.examples.base");
-	auto builder = Gtk::Builder::create_from_file("app.glade");
+	auto app = Application::create(argc, argv, "org.gtkmm.examples.base");
+	auto builder = Builder::create_from_file("app.glade");
 
-	Gtk::Window *window = nullptr;
+	Window *window = nullptr;
 	builder->get_widget("window", window);
 
-	Gtk::Button *button = nullptr;
+	Button *button = nullptr;
 	builder->get_widget("button", button);
 	button->signal_clicked().connect(sigc::ptr_fun(on_button_clicked));
-	
-	Gtk::EntryBuffer *entrybuffer1 = nullptr;//его нужно связать с буфером из глейда
-
-	Gtk::CheckButton *check1 = nullptr;
+/*
+	EntryBuffer *entrybuffer1 = nullptr;//его нужно связать с буфером из глейда
+	builder->get_widget("entrybuffer1", entrybuffer1);
+*/
+	CheckButton *check1 = nullptr;
 	builder->get_widget("check1", check1);
 	check1->signal_toggled().connect(sigc::ptr_fun(on_check1_toggled));
 	
-	Gtk::CheckButton *check2 = nullptr;
+	CheckButton *check2 = nullptr;
 	builder->get_widget("check2", check2);
 	check2->signal_toggled().connect(sigc::ptr_fun(on_check2_toggled));
 	
-	Gtk::CheckButton *check3 = nullptr;
+	CheckButton *check3 = nullptr;
 	builder->get_widget("check3", check3);
 	check3->signal_toggled().connect(sigc::ptr_fun(on_check3_toggled));
 	
-	Gtk::CheckButton *check4 = nullptr;
+	CheckButton *check4 = nullptr;
 	builder->get_widget("check4", check4);
 	check4->signal_toggled().connect(sigc::ptr_fun(on_check4_toggled));
 
-	Gtk::Entry *entry1 = nullptr;
+
+	Entry *entry1 = nullptr;
 	builder->get_widget("entry1", entry1);
+
+	entry1->signal_changed().connect(sigc::bind<Gtk::Entry*>(sigc::ptr_fun(f), entry1));
 
 	app->run(*window);
 }

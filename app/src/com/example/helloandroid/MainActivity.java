@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         WebViewClient webViewClient = new WebViewClient();
         webView.setWebViewClient(webViewClient);
  
-        webView.loadUrl("https://example.com");
+        webView.loadUrl("https://yandex.ru/");
     }
  
     @Override

@@ -66,7 +66,6 @@
                 <property name="can_focus">True</property>
                 <property name="events"/>
                 <property name="halign">end</property>
-                <property name="buffer">entrybuffer1</property>
                 <property name="invisible_char">*</property>
                 <property name="width_chars">33</property>
                 <property name="progress_pulse_step">0</property>
