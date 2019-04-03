@@ -22,4 +22,5 @@ public class MainActivity extends Activity {
  
         WebViewClient webViewClient = new WebViewClient();
         webView.setWebViewClient(webViewClient);
- 
+	webView.getSettings().setBuiltInZoomControls(true);
+	webView.getSettings().setDisplayZoomControls(false);

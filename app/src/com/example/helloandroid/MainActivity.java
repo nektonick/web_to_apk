@@ -22,8 +22,9 @@ public class MainActivity extends Activity {
  
         WebViewClient webViewClient = new WebViewClient();
         webView.setWebViewClient(webViewClient);
- 
-        webView.loadUrl("https://translate.google.com/");
+	webView.getSettings().setBuiltInZoomControls(true);
+	webView.getSettings().setDisplayZoomControls(false);
+        webView.loadUrl("https://github.com/nektonick/web_to_apk/tree/master/app");
     }
  
     @Override
