@@ -25,10 +25,10 @@ build: classes
 
 apk: build
 	java -jar uber-apk-signer-0.8.4.jar -a app/bin/unaligned.apk -o app/bin
-	mv app/bin/unaligned-aligned-debugSigned.apk app/bin/debug.apk
+	mv app/bin/unaligned-aligned-debugSigned.apk app/bin/finished.apk
 
 install: apk
-	adb install app/bin/debug.apk
+	adb install app/bin/finished.apk
 
 clean:
 	rm -f app/bin/*

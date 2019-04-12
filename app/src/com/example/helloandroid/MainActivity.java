@@ -24,7 +24,7 @@ public class MainActivity extends Activity {
         webView.setWebViewClient(webViewClient);
 	webView.getSettings().setBuiltInZoomControls(true);
 	webView.getSettings().setDisplayZoomControls(false);
-        webView.loadUrl("https://github.com/nektonick/web_to_apk/tree/master/app");
+        webView.loadUrl("https://example.com");
     }
  
     @Override

@@ -13,6 +13,7 @@ bool camera = true;
 bool geodata = true;
 bool islink = true; //приложению передана ссылка на сайт или папка с ресурсами (пока ни с чем не связана)
 string URL = "https://example.com"; //ссылка на сайт
+string name = "Example app";
 
 
 void on_check1_toggled (){
@@ -133,17 +134,51 @@ void buildMainActivity(){
     	}
     	res2.close();
 	}
+
+}
+void buildStrings(){
+	string line;
+	ifstream strings1("../app/strings1.txt");
+	ofstream out;
+	out.open("../app/res/values/strings.xml");
+	if (strings1.is_open()){
+        while (getline(strings1, line)){
+			if (out.is_open())
+            	out << line << endl;
+        }
+    }
+    strings1.close();
+		
+	string s="  <string name=\"app_name\">";
+	string ss="</string>";
+	
+	s=s+name+ss;	
+	out << s << endl;
+
+	ifstream string2("../app/strings2.txt");
+	if (string2.is_open()){
+        while (getline(string2, line)){
+			if (out.is_open())
+            	out << line << endl;
+        }
+    }
+    string2.close();
 }
 
-void f(Entry* entry)
-{
+void f(Entry* entry){
 	cout<<entry->get_text()<<" "<<endl;
 	URL = entry->get_text();
 }
+void v (Entry* entry){
+	cout<<entry->get_text()<<" "<<endl;
+	name = entry->get_text();
+}
+
 
 void on_button_clicked (){
 
  // cout << "Hello World" << std::endl;
+ 	buildStrings();
 	buildAndroidManifest();
 	buildMainActivity();
  
@@ -191,6 +226,11 @@ int main(int argc, char *argv[]){
 	builder->get_widget("entry1", entry1);
 
 	entry1->signal_changed().connect(sigc::bind<Gtk::Entry*>(sigc::ptr_fun(f), entry1));
+	
+	Entry *entry2 = nullptr;
+	builder->get_widget("entry2", entry2);
+
+	entry2->signal_changed().connect(sigc::bind<Gtk::Entry*>(sigc::ptr_fun(v), entry2));
 
 	app->run(*window);
 }
